@@ -1,0 +1,9 @@
+{
+    "sketch": "device.ino",
+    "port": "COM3",
+    "board": "esp32:esp32:esp32doit-devkit-v1",
+    "output": "./.build",
+    "debugger": "jlink"
+}
+
+//"configuration": "FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
