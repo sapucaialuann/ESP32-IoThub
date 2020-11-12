@@ -8,6 +8,7 @@ using System.Net.Http;
 using Microsoft.Extensions.Logging;
 using IoTHubIngestion.Domain.Interfaces.UoW;
 using System.Threading.Tasks;
+using System;
 
 namespace IoTHubIngestion
 {
@@ -26,7 +27,8 @@ namespace IoTHubIngestion
             log.LogInformation($"C# IoT Hub trigger function processed a message: {Encoding.UTF8.GetString(message.Body.Array)}");
             using (var uow = _context.Create() )
             {
-                var res = await uow.QueryAsync<dynamic>("SELECT * FROM Table", null);
+                await uow.ExecuteAsync($"INSERT (id, name) INTO User ({Guid.NewGuid()}, 'Teste')");
+                var res = await uow.QueryAsync<dynamic>("SELECT * FROM User", null);
             }
             
         }
