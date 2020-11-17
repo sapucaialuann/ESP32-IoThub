@@ -1,4 +1,4 @@
-using IotHubIngestion.DataAccess.UoW;
+using IotHubIngestion.Infra.Data.UoW;
 using IoTHubIngestion.Domain.Interfaces.UoW;
 using Microsoft.Extensions.Configuration;
 

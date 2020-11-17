@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IotHubIngestion.DataAccess.UoW
+namespace IotHubIngestion.Infra.Data.UoW
 {
     public class UnitOfWork : IUnitOfWork
     {

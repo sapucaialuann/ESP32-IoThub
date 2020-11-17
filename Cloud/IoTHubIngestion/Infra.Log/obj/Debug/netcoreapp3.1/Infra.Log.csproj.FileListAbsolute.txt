@@ -1,0 +1,5 @@
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp3.1\Infra.Log.deps.json
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp3.1\Infra.Log.dll
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp3.1\Infra.Log.csprojAssemblyReference.cache
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp3.1\Infra.Log.AssemblyInfoInputs.cache
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp3.1\Infra.Log.AssemblyInfo.cs

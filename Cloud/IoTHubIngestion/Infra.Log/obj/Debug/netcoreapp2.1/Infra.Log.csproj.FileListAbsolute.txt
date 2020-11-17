@@ -1,0 +1,12 @@
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csprojAssemblyReference.cache
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.AssemblyInfoInputs.cache
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.AssemblyInfo.cs
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csproj.CoreCompileInputs.cache
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Infra.Log.deps.json
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Infra.Log.dll
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Infra.Log.pdb
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Domain.dll
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Domain.pdb
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csproj.CopyComplete
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.dll
+C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.pdb
