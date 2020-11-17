@@ -10,6 +10,7 @@ using IoTHubIngestion.Domain.Interfaces.UoW;
 using System.Threading.Tasks;
 using System;
 using IoTHubIngestion.Domain.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace IoTHubIngestion
 {
@@ -17,16 +18,20 @@ namespace IoTHubIngestion
     {
         private IUnitOfWorkFactory _context;
         private ILoggerManager _logger;
+        private IConfiguration _config;
 
-        public IoTHubIngestionFunction(IUnitOfWorkFactory context, ILoggerManager logger)
+        public IoTHubIngestionFunction(IUnitOfWorkFactory context, ILoggerManager logger, IConfiguration configuration)
         {
             _context = context;
             _logger = logger;
+            _config = configuration;
         }
 
         [FunctionName("IoTHubIngestionFunction")]
-        public async Task Run([IoTHubTrigger("messages/events", Connection = "IotHubConnectionString")]EventData message, ILogger log)
+        public async Task Run([IoTHubTrigger("messages/events", Connection = "IotHubConnectionString")]EventData message, ILogger log, ExecutionContext context)
         {
+            
+            FunctionConfig.ConnectionString = _config["Data: DefaultConnection:ConnectionString"];
             var msg = Encoding.UTF8.GetString(message.Body.Array);
             log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
             _logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
@@ -40,6 +45,14 @@ namespace IoTHubIngestion
 
             _logger.LogInfo($"Finished execution");
 
+        }
+
+        private IConfigurationRoot GetAppConfiguration(ExecutionContext context)
+        {
+            return new ConfigurationBuilder()
+                             .SetBasePath(context.FunctionAppDirectory)
+                             .AddEnvironmentVariables()
+                             .Build();
         }
     }
 }

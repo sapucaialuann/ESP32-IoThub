@@ -1,23 +1,25 @@
-﻿using IotHubIngestion.Infra.Data.UoW;
+﻿using Infra.Data.UoW;
+using IotHubIngestion.Infra.Data.UoW;
 using IotHubIngestion.Infra.Log;
 using IoTHubIngestion.Domain.Interfaces.UoW;
 using IoTHubIngestion.Domain.Models;
 using Logzio.DotNet.NLog;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Config;
+using System;
 
-[assembly: FunctionsStartup(typeof(Infra.IoC.Startup))]
+[assembly: FunctionsStartup(typeof(IoTHubIngestion.Startup))]
 
-namespace Infra.IoC
+namespace IoTHubIngestion
 {
     public class Startup : FunctionsStartup
     {
+
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            var config = builder.GetContext().Configuration;
-
             SetLogConfiguration();
 
             builder.Services.AddSingleton<ILoggerManager>((s) =>
@@ -25,9 +27,11 @@ namespace Infra.IoC
                 return new LoggerManager();
             }
             );
-            builder.Services.AddSingleton<IUnitOfWork>((s) => {
-                return new UnitOfWork(config);
-            });
+
+            builder.Services.AddSingleton<IUnitOfWorkFactory>((s) => 
+                {
+                    return new UnitOfWorkFactory(new FunctionConfig());
+                });
 
         }
 
