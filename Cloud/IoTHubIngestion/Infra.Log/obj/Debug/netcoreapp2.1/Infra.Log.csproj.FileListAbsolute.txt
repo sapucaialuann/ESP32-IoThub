@@ -10,3 +10,15 @@ C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp
 C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csproj.CopyComplete
 C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.dll
 C:\@Git\GitHub\ESP32-IoThub\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.pdb
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Infra.Log.deps.json
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Infra.Log.dll
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Infra.Log.pdb
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Domain.dll
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\bin\Debug\netcoreapp2.1\Domain.pdb
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csprojAssemblyReference.cache
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.AssemblyInfoInputs.cache
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.AssemblyInfo.cs
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csproj.CoreCompileInputs.cache
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.csproj.CopyComplete
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.dll
+C:\Users\luann.sapucaia\Documents\IoTWorkbenchProjects\examples\exemple-telemetry\Cloud\IoTHubIngestion\Infra.Log\obj\Debug\netcoreapp2.1\Infra.Log.pdb

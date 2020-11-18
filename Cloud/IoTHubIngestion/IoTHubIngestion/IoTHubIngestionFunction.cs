@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System;
 using IoTHubIngestion.Domain.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace IoTHubIngestion
 {
@@ -19,19 +20,24 @@ namespace IoTHubIngestion
         private IUnitOfWorkFactory _context;
         private ILoggerManager _logger;
         private IConfiguration _config;
+        private readonly IOptions<ApplicationSettings> _applicationSettingsOptions;
+        private readonly IOptions<ConnectionStrings> _connectionStringsOptions;
 
-        public IoTHubIngestionFunction(IUnitOfWorkFactory context, ILoggerManager logger, IConfiguration configuration)
+
+        public IoTHubIngestionFunction(IUnitOfWorkFactory context, ILoggerManager logger, IConfiguration configuration, IOptions<ApplicationSettings> applicationSettingsOptions, IOptions<ConnectionStrings> connectionStringsOptions)
         {
             _context = context;
             _logger = logger;
             _config = configuration;
+            _applicationSettingsOptions = applicationSettingsOptions;
+            _connectionStringsOptions = connectionStringsOptions;
         }
 
         [FunctionName("IoTHubIngestionFunction")]
         public async Task Run([IoTHubTrigger("messages/events", Connection = "IotHubConnectionString")]EventData message, ILogger log, ExecutionContext context)
         {
-            
-            FunctionConfig.ConnectionString = _config["Data: DefaultConnection:ConnectionString"];
+
+            FunctionConfig.ConnectionString = _config["SQLConnectionString"];
             var msg = Encoding.UTF8.GetString(message.Body.Array);
             log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
             _logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
@@ -56,3 +62,4 @@ namespace IoTHubIngestion
         }
     }
 }
+

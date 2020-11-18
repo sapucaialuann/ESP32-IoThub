@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Config;
 using System;
+using static IoTHubIngestion.IoTHubIngestionFunction;
 
 [assembly: FunctionsStartup(typeof(IoTHubIngestion.Startup))]
 
@@ -28,10 +29,15 @@ namespace IoTHubIngestion
             }
             );
 
-            builder.Services.AddSingleton<IUnitOfWorkFactory>((s) => 
+            builder.Services.AddSingleton<IUnitOfWorkFactory>((s) =>
                 {
                     return new UnitOfWorkFactory(new FunctionConfig());
                 });
+
+            //my edition
+            builder.Services.AddOptions<ApplicationSettings>().Configure<IConfiguration>((settings, configuration) => { configuration.Bind(settings); });
+
+            builder.Services.AddOptions<ConnectionStrings>().Configure<IConfiguration>((settings, configuration) => { configuration.Bind("ConnectionStrings", settings); });
 
         }
 
