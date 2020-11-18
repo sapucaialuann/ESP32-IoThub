@@ -100,10 +100,6 @@ namespace IotHubIngestion.DataAccess.UoW
             _transaction.Dispose();
 
         }
-        private string connectionString()
-        {
-            return "User ID=postgres;Password=password;Host=192.168.99.100;Port=5432;Database=pdmdb2;Pooling=true;Minimum Pool Size=20;Maximum Pool Size=50;Connection Idle Lifetime=300;Command Timeout=0";
-        }
 
         public void AsyncCommit(Task task)
         {

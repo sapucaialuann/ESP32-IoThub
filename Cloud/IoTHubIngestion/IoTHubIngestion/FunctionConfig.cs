@@ -5,7 +5,7 @@ namespace IoTHubIngestion
 {
     public class FunctionConfig : IConfiguration
     {
-        public static string ConnectionString = "Server=bskpdmdb.postgres.database.azure.com;Database=pdmdb;Port=5432;User Id=pdmdbadmin@bskpdmdb;Password=Br@sk3mPdmCtT1m3sc@L3;Ssl Mode=Require;Command Timeout=180;";
+        public static string ConnectionString = "";
         public static string Environment = "dev";
         public static string SbConnectionString;
         public static string HeimdallUrl;
