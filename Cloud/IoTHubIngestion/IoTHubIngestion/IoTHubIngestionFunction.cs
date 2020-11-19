@@ -45,7 +45,7 @@ namespace IoTHubIngestion
 
             using (var uow = _context.Create() )
             {
-                await uow.ExecuteAsync($"INSERT (CodMessage, CodDevice, MessageDevice) INTO smart_header.IoTMessage ({new Random().Next(1, 10000)}, 1, '{msg}')");
+                int v = await uow.ExecuteAsync(sql: $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')");
                 var res = await uow.QueryAsync<IoTMessage>("SELECT * FROM IoTMessage", null);
 
             }
