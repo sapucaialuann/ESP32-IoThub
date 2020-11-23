@@ -40,12 +40,14 @@ namespace IoTHubIngestion
             //FunctionConfig.ConnectionString = _connectionStringsOptions.Value.SQLConnectionString;
             FunctionConfig.ConnectionString = Environment.GetEnvironmentVariable("SQLConnectionString");
             var msg = Encoding.UTF8.GetString(message.Body.Array);
+            string[] msgArray= { msg };
             log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
             _logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
 
             using (var uow = _context.Create() )
             {
-                int v = await uow.ExecuteAsync(sql: $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')");
+                //int v = await uow.ExecuteAsync(sql: $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')");
+                int v = await uow.ExecuteAsync(sql: $"BULK INSERT smart_header.IoTMessage FROM {msgArray}");
                 var res = await uow.QueryAsync<IoTMessage>("SELECT * FROM IoTMessage", null);
 
             }
