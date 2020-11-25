@@ -13,6 +13,9 @@ using IoTHubIngestion.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Configuration;
+using System.Collections.Generic;
+using System.Linq;
+using Dapper;
 
 namespace IoTHubIngestion
 {
@@ -40,21 +43,59 @@ namespace IoTHubIngestion
             //FunctionConfig.ConnectionString = _connectionStringsOptions.Value.SQLConnectionString;
             FunctionConfig.ConnectionString = Environment.GetEnvironmentVariable("SQLConnectionString");
             var msg = Encoding.UTF8.GetString(message.Body.Array);
-            string[] msgArray= { msg };
+            //string tempMessage = msg.ToString();
+            var messageList = new List<string>();
+            messageList.Add(msg);
+
+            
+            //List<string> messageList = messageList.Add(tempMessage);
+            List<string> sqls = GetSqlInBatches(messageList); // ADD PARAMETER DUE TO WHAT WILL ENTER IN THE LINES ABOVE
             log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
             _logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
 
+
+            messageList.ForEach(x => _logger.LogInfo($"C# IoT Hub trigger function processed a message teste: {x}"));
+            messageList.ForEach(x => log.LogInformation($"C# IoT Hub trigger function processed a message teste: {x}"));
+
             using (var uow = _context.Create() )
             {
-                //int v = await uow.ExecuteAsync(sql: $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')");
-                int v = await uow.ExecuteAsync(sql: $"BULK INSERT smart_header.IoTMessage FROM {msgArray}");
+
+                //string sql = $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')";
+                //int executeQuery = await uow.ExecuteAsync(sql: sql);
                 var res = await uow.QueryAsync<IoTMessage>("SELECT * FROM IoTMessage", null);
+
+                foreach (var sql in sqls)
+                {
+                    await uow.ExecuteAsync(sql);
+                };
 
             }
 
             _logger.LogInfo($"Finished execution");
 
         }
+
+        public List<string> GetSqlInBatches(List<string> IoTMessage)
+        {
+            var insertQuery = $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{IoTMessage}')";
+            var batchSize = 10;
+
+            var queriesToExecute = new List<string>();
+            var numberofBatches = (int)Math.Ceiling((double)IoTMessage.Count / batchSize);
+
+            //for(int i = 0; i < numberofBatches; i++)
+            //{
+            //    var messageToInsert = IoTMessage.Skip(i * batchSize).Take(batchSize);
+            //    queriesToExecute.Add(insertQuery + string.Join(',', messageToInsert));
+
+            //}
+            IoTMessage.ForEach(x => IoTMessage.Skip(IoTMessage.Count * batchSize).Take(batchSize));
+            IoTMessage.ForEach(x => queriesToExecute.Add(insertQuery + string.Join(',', x)));
+
+            return queriesToExecute;
+
+        }
+
 
         private IConfigurationRoot GetAppConfiguration(ExecutionContext context)
         {
