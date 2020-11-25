@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\luann.sapucaia\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\**",
+                "C:\\Users\\luann.sapucaia\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\**",
+                "C:\\Users\\luann.sapucaia\\Documents\\Arduino\\libraries\\**",
+                "C:\\Users\\luann.sapucaia\\Documents\\IoTWorkbenchProjects\\**",
+                "C:/Users/luann.sapucaia/AppData/Local/Arduino15/packages/esp32/hardware/esp32/1.0.4/tools/sdk/include/freertos",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                "C:/Users/luann.sapucaia/AppData/Local/Arduino15/packages/esp32/hardware/esp32/1.0.4/libraries/AzureIoT/src"
+            ],
+            "defines": [
+                "ARDUINO=10800",
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compilerPath": "C:\\Users\\luann.sapucaia\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\xtensa-esp32-elf-gcc\\1.22.0-80-g6c4433a-5.2.0\\bin\\xtensa-esp32-elf-gcc"
+        }
+    ],
+    "version": 4
+}
