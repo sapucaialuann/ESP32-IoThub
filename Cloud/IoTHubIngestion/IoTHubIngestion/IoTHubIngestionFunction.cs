@@ -37,38 +37,36 @@ namespace IoTHubIngestion
         }
 
         [FunctionName("IoTHubIngestionFunction")]
-        public async Task Run([IoTHubTrigger("messages/events", Connection = "IotHubConnectionString")]EventData message, ILogger log, ExecutionContext context)
+        public async Task Run([IoTHubTrigger("messages/events", Connection = "IotHubConnectionString")]EventData[] messages, ILogger log, ExecutionContext context)
         {
 
             //FunctionConfig.ConnectionString = _connectionStringsOptions.Value.SQLConnectionString;
             FunctionConfig.ConnectionString = Environment.GetEnvironmentVariable("SQLConnectionString");
-            var msg = Encoding.UTF8.GetString(message.Body.Array);
             //string tempMessage = msg.ToString();
-            var messageList = new List<string>();
-            messageList.Add(msg);
+            var messageList = messages.Select(message => Encoding.UTF8.GetString(message.Body.Array)).ToList();
 
             
             //List<string> messageList = messageList.Add(tempMessage);
             List<string> sqls = GetSqlInBatches(messageList); // ADD PARAMETER DUE TO WHAT WILL ENTER IN THE LINES ABOVE
-            log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
-            _logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
+            //log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
+            //_logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
 
 
-            messageList.ForEach(x => _logger.LogInfo($"C# IoT Hub trigger function processed a message teste: {x}"));
-            messageList.ForEach(x => log.LogInformation($"C# IoT Hub trigger function processed a message teste: {x}"));
+            _logger.LogInfo($"C# IoT Hub trigger function processed a message teste: {messages.Length}");
+            log.LogInformation($"C# IoT Hub trigger function processed a message teste: {messages.Length}");
 
             using (var uow = _context.Create() )
             {
 
                 //string sql = $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')";
                 //int executeQuery = await uow.ExecuteAsync(sql: sql);
-                var res = await uow.QueryAsync<IoTMessage>("SELECT * FROM IoTMessage", null);
 
                 foreach (var sql in sqls)
                 {
                     await uow.ExecuteAsync(sql);
                 };
 
+                var res = await uow.QueryAsync<IoTMessage>("SELECT * FROM IoTMessage", null);
             }
 
             _logger.LogInfo($"Finished execution");
@@ -77,20 +75,25 @@ namespace IoTHubIngestion
 
         public List<string> GetSqlInBatches(List<string> IoTMessage)
         {
-            var insertQuery = $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{IoTMessage}')";
+            var insertQuery = $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ";
             var batchSize = 10;
 
             var queriesToExecute = new List<string>();
-            var numberofBatches = (int)Math.Ceiling((double)IoTMessage.Count / batchSize);
+            var numberofBatches = (int)Math.Ceiling((double)IoTMessage.Count() / batchSize);
 
-            //for(int i = 0; i < numberofBatches; i++)
+            for (int i = 0; i < numberofBatches; i++)
+            {
+                var messageToInsert = IoTMessage.Skip(i * batchSize).Take(batchSize);
+                var valuesToInsert = IoTMessage.Select(x => $"({new Random().Next(1, 10000)}, 1, '{x}')");
+                queriesToExecute.Add(insertQuery + string.Join(',', valuesToInsert));
+            }
+
+
+            //IoTMessage.ForEach(x =>
             //{
-            //    var messageToInsert = IoTMessage.Skip(i * batchSize).Take(batchSize);
-            //    queriesToExecute.Add(insertQuery + string.Join(',', messageToInsert));
-
-            //}
-            IoTMessage.ForEach(x => IoTMessage.Skip(IoTMessage.Count * batchSize).Take(batchSize));
-            IoTMessage.ForEach(x => queriesToExecute.Add(insertQuery + string.Join(',', x)));
+            //    IoTMessage.Skip(IoTMessage.Count * batchSize).Take(batchSize)
+            //};);
+            //IoTMessage.ForEach(x => queriesToExecute.Add(insertQuery + string.Join(',', x)));
 
             return queriesToExecute;
 
