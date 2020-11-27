@@ -1,10 +1,8 @@
 using IoTHubTrigger = Microsoft.Azure.WebJobs.EventHubTriggerAttribute;
 
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Azure.EventHubs;
 using System.Text;
-using System.Net.Http;
 using Microsoft.Extensions.Logging;
 using IoTHubIngestion.Domain.Interfaces.UoW;
 using System.Threading.Tasks;
@@ -12,10 +10,8 @@ using System;
 using IoTHubIngestion.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
-using Dapper;
 
 namespace IoTHubIngestion
 {

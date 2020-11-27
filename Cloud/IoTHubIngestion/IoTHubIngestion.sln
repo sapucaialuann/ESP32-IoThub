@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data", "DataAccess\Infra.Data.csproj", "{38C4665A-C949-4698-A260-9745936A5FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Log", "Infra.Log\Infra.Log.csproj", "{88B7F1DD-202C-4824-B00B-7B5874EAC61B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Log", "Infra.Log\Infra.Log.csproj", "{88B7F1DD-202C-4824-B00B-7B5874EAC61B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
