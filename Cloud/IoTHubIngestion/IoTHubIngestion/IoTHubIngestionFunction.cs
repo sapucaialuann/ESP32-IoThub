@@ -96,7 +96,7 @@ namespace IoTHubIngestion
         }
 
 
-        public async Task RunTestNewDevice([IoTHubTrigger("messages/events", Connection = "IotHubConnectionString")] EventData[] messages, ILogger log, ExecutionContext context)
+        public async Task RunTestNewDevice([IoTHubTrigger("messages/events", Connection = "IoTNewDeviceConnection")] EventData[] messages, ILogger log, ExecutionContext context)
         {
 
             //FunctionConfig.ConnectionString = _connectionStringsOptions.Value.SQLConnectionString;
@@ -111,8 +111,8 @@ namespace IoTHubIngestion
             //_logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
 
 
-            _logger.LogInfo($"C# IoT Hub trigger function processed a message teste: {messages.Length}");
-            log.LogInformation($"C# IoT Hub trigger function processed a message teste: {messages.Length}");
+            _logger.LogInfo($"C# IoT Hub trigger function processed a message teste de novo dispositivo: {messages.Length}");
+            log.LogInformation($"C# IoT Hub trigger function processed a message teste de novo dispositivo: {messages.Length}");
 
             using (var uow = _context.Create())
             {
