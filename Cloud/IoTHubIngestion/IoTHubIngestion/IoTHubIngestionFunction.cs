@@ -95,43 +95,6 @@ namespace IoTHubIngestion
 
         }
 
-
-        public async Task RunTestNewDevice([IoTHubTrigger("messages/events", Connection = "IoTNewDeviceConnection")] EventData[] messages, ILogger log, ExecutionContext context)
-        {
-
-            //FunctionConfig.ConnectionString = _connectionStringsOptions.Value.SQLConnectionString;
-            FunctionConfig.ConnectionString = Environment.GetEnvironmentVariable("SQLConnectionString");
-            //string tempMessage = msg.ToString();
-            var messageList = messages.Select(message => Encoding.UTF8.GetString(message.Body.Array)).ToList();
-
-
-            //List<string> messageList = messageList.Add(tempMessage);
-            List<string> sqls = GetSqlInBatches(messageList); // ADD PARAMETER DUE TO WHAT WILL ENTER IN THE LINES ABOVE
-            //log.LogInformation($"C# IoT Hub trigger function processed a message: {msg}");
-            //_logger.LogInfo($"C# IoT Hub trigger function processed a message: {msg}");
-
-
-            _logger.LogInfo($"C# IoT Hub trigger function processed a message teste de novo dispositivo: {messages.Length}");
-            log.LogInformation($"C# IoT Hub trigger function processed a message teste de novo dispositivo: {messages.Length}");
-
-            using (var uow = _context.Create())
-            {
-
-                //string sql = $"INSERT INTO smart_header.IoTMessage (CodMessage, CodDevice, MessageDevice) VALUES ({new Random().Next(1, 10000)}, 1, '{msg}')";
-                //int executeQuery = await uow.ExecuteAsync(sql: sql);
-
-                foreach (var sql in sqls)
-                {
-                    await uow.ExecuteAsync(sql);
-                };
-
-                var res = await uow.QueryAsync<IoTMessage>("SELECT * FROM IoTMessage", null);
-            }
-
-            _logger.LogInfo($"Finished execution");
-
-        }
-
         private IConfigurationRoot GetAppConfiguration(ExecutionContext context)
         {
             return new ConfigurationBuilder()
